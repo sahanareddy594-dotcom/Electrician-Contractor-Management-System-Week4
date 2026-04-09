@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Materials</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>ECMS</h2>
+    <a href="/">🏠 Dashboard</a>
+    <a href="/electricians">👷 Electricians</a>
+    <a href="/jobs">💼 Jobs</a>
+    <a href="/tasks">📋 Tasks</a>
+    <a href="/materials">🧱 Materials</a>
+    <a href="/reports">📊 Reports</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+    <h2>🧱 Materials Management</h2>
+
+    <!-- ADD MATERIAL -->
+    <form method="POST">
+        <input type="text" name="name" placeholder="Material Name" required>
+        <input type="number" name="quantity" placeholder="Total Quantity" required>
+        <input type="number" name="used" placeholder="Used Quantity" required>
+        <button type="submit">Add Material</button>
+    </form>
+
+    <br>
+
+    <!-- TABLE -->
+    <table>
+        <tr>
+            <th>Material</th>
+            <th>Total</th>
+            <th>Used</th>
+            <th>Remaining</th>
+        </tr>
+
+        {% for m in data %}
+        <tr>
+            <td>🔧 {{ m.name }}</td>
+            <td>{{ m.quantity }}</td>
+            <td>{{ m.used }}</td>
+            <td><b>{{ m.quantity - m.used }}</b></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+</body>
+</html>

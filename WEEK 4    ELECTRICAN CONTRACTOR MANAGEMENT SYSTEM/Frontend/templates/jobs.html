@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jobs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>ECMS</h2>
+     <a href="/">🏠 Dashboard</a>
+    <a href="/electricians">👷 Electricians</a>
+    <a href="/jobs">💼 Jobs</a>
+    <a href="/tasks">📋 Tasks</a>
+    <a href="/materials">🧱 Materials</a>
+    <a href="/reports">📊 Reports</a>
+</div>
+
+<div class="main">
+    <h2>Jobs</h2>
+
+    <form method="GET">
+        <input type="text" name="search" placeholder="Search Jobs">
+        <button>Search</button>
+    </form>
+
+    <form method="POST">
+        <input type="text" name="title" placeholder="Title" required>
+        <input type="text" name="location" placeholder="Location" required>
+        <input type="date" name="deadline" required>
+
+        <select name="electrician">
+            {% for e in electricians %}
+            <option value="{{ e.id }}">{{ e.name }}</option>
+            {% endfor %}
+        </select>
+
+        <button>Add Job</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Deadline</th>
+            <th>Electrician</th>
+        </tr>
+
+        {% for j in data %}
+        <tr>
+            <td>{{ j.title }}</td>
+            <td>{{ j.location }}</td>
+            <td>{{ j.deadline }}</td>
+            <td>{{ j.ename }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+</body>
+</html>

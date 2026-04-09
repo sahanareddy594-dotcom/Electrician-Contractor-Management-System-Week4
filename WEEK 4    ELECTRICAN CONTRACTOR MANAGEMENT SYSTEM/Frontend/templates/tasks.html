@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tasks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>ECMS</h2>
+    <a href="/">🏠 Dashboard</a>
+    <a href="/electricians">👷 Electricians</a>
+    <a href="/jobs">💼 Jobs</a>
+    <a href="/tasks">📋 Tasks</a>
+    <a href="/materials">🧱 Materials</a>
+    <a href="/reports">📊 Reports</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+    <h2>📋 Tasks Management</h2>
+
+    <!-- FILTER -->
+    <form method="GET">
+        <select name="status">
+            <option value="">All</option>
+            <option>Pending</option>
+            <option>In Progress</option>
+            <option>Completed</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    <br>
+
+    <!-- ADD TASK -->
+    <form method="POST">
+        <input type="text" name="name" placeholder="Task Name" required>
+
+        <select name="job" required>
+            <option value="">Select Job</option>
+            {% for j in jobs %}
+            <option value="{{ j.id }}">{{ j.title }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="electrician" required>
+            <option value="">Select Electrician</option>
+            {% for e in electricians %}
+            <option value="{{ e.id }}">{{ e.name }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="status">
+            <option>Pending</option>
+            <option>In Progress</option>
+            <option>Completed</option>
+        </select>
+
+        <button type="submit">Add Task</button>
+    </form>
+
+    <br>
+
+    <!-- TABLE -->
+    <table>
+        <tr>
+            <th>Task</th>
+            <th>Job</th>
+            <th>Electrician</th>
+            <th>Status</th>
+        </tr>
+
+        {% for t in data %}
+        <tr>
+            <td>{{ t.name }}</td>
+            <td>🏢 {{ t.jobname }}</td>
+            <td>👷 {{ t.ename }}</td>
+
+            <td>
+                {% if t.status == "Pending" %}
+                    <span class="status pending">● Pending</span>
+
+                {% elif t.status == "In Progress" %}
+                    <span class="status" style="background: blue;">● In Progress</span>
+
+                {% elif t.status == "Completed" %}
+                    <span class="status completed">● Completed</span>
+
+                {% else %}
+                    {{ t.status }}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reports</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>ECMS</h2>
+    <a href="/">🏠 Dashboard</a>
+    <a href="/electricians">👷 Electricians</a>
+    <a href="/jobs">💼 Jobs</a>
+    <a href="/tasks">📋 Tasks</a>
+    <a href="/materials">🧱 Materials</a>
+    <a href="/reports">📊 Reports</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+    <h2>📊 Reports Dashboard</h2>
+
+    <!-- CARDS -->
+    <div class="card blue">
+        <h3>📋 Total Tasks</h3>
+        <p>{{ tasks }}</p>
+    </div>
+
+    <div class="card green">
+        <h3>✅ Completed Tasks</h3>
+        <p>{{ completed }}</p>
+    </div>
+
+    <div class="card red">
+        <h3>👷 Total Electricians</h3>
+        <p>{{ electricians }}</p>
+    </div>
+
+</div>
+
+</body>
+</html>
